@@ -1,0 +1,15 @@
+.Header {
+	background-image: url('../../images/Gir.png');
+	background-size: 35%;
+	background-repeat: no-repeat;
+	height: 50px;
+	width: 69px;
+	display: inline-block;
+	vertical-align: middle;
+}
+html {
+
+	background: white;
+	font: 16px Arial;
+
+}
