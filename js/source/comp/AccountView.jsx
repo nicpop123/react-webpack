@@ -10,7 +10,7 @@ var AccountView = React.createClass({
 	getInitialState: function() {
 		return {
 			data: {},
-			users: {},
+			users: [],
 		};
 	},
 
@@ -53,17 +53,18 @@ var AccountView = React.createClass({
 			type: "post",
 			data: this.state.data,
 			success: function(data, a) {
-				this.setState({
-					data: {},
-				});
-			}.bind(this),
+			},
 			error: function(e) {
-
 			},
 			complete: function(a, data) {
+				var clear = {
+					firstname: '',
+					lastname: '',
+					password: '',
+					emailaddress: '',
+				};
 				this.setState({
-					data: {},
-					users: users,
+					data: clear
 				});
 			}.bind(this)
 		});
