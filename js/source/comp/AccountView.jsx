@@ -1,20 +1,22 @@
-var AccountView = React.createClass({
+var React = require('react');
+var DataTable = require('react-data-components').DataTable;
+var AccountForm = require('./AccountForm.jsx');
 
-	getDefaultProps: function() {
-		return {
-			data: {},
-			users: [],
-		};
-	},
+var AccountView = React.createClass({
 
 	getInitialState: function() {
 		return {
 			data: {},
 			users: [],
+			dialog: null,
 		};
 	},
 
 	componentDidMount: function() {
+		this.loadUsers();
+	},
+	
+	loadUsers: function() {
 		$.ajax({
 			url: "/react-webpack/js/source/controllers/get_accounts.php",
 			async: "false",
@@ -22,7 +24,7 @@ var AccountView = React.createClass({
 			sucess: function(json) {
 				console.log("success!");
 				console.log(json);		
-	
+
 			},
 			error:function(x, e) {
 				alert(e);
@@ -44,82 +46,62 @@ var AccountView = React.createClass({
 		});
 	},
 
-	handleSave: function(e) {
+	closeDialog: function(e) {
 		e.preventDefault();
-		var users = this.state.users;
-		users.push(this.state.data);
-		$.ajax({
-			url: "/react-webpack/js/source/controllers/post_accounts.php",
-			type: "post",
-			data: this.state.data,
-			success: function(data, a) {
-			},
-			error: function(e) {
-			},
-			complete: function(a, data) {
-				var clear = {
-					firstname: '',
-					lastname: '',
-					password: '',
-					emailaddress: '',
-				};
-				this.setState({
-					data: clear
-				});
-			}.bind(this)
+		$(function() {
+			$dialog.dialog('close');
 		});
 	},
 
+	formPopup: function(e) {
+		e.preventDefault();
+		$(function() {
+			var $dialog = $('<div>').dialog({
+				title: 'Add Account',
+				width: 400,
+				height: 400,
+				close: function(e) {
+					$(this).remove();
+				}
+			});
+			ReactDOM.render(<AccountForm callback={this.loadUsers} />, $dialog[0]);
+		}.bind(this));
+	},
+
+	handleDelete: function(e) {
+		e.preventDefault();
+		$.ajax({
+			url: "/react-webpack/js/source/controllers/delete_accounts.php",
+			type: "PUT",
+			success: function(response) {
+				console.log(response, "successfully deleted");
+			}
+		});
+		this.loadUsers();
+	},
+
 	render: function() {
+		var columns = [
+			{title: 'First name', prop: 'firstname', width: 15},
+			{title: 'Last name', prop: 'lastname', width: 15 },
+			{title: 'Password', prop: 'password', width: 15},
+			{title: 'Email address', prop: 'emailaddress', width: 15},
+		];
+		
 		return (
-			<div className="container">
+			<div className="container hide-scroller">
+				{this.state.dialog}
 				<form method="post">	
 					<dl id="form" className="row">
-						<div className="col-md-4">
-							<dt>Firstname</dt>
-							<dd>
-								<input name="firstname" type="text" value={this.state.data.firstname} onChange={this.handleChange} />
-							</dd>
-							<dt>Lastname</dt>
-							<dd>
-								<input name="lastname" type="text" value={this.state.data.lastname} onChange={this.handleChange} />
-							</dd>
-							<dt>Password</dt>
-							<dd>
-								<input name="password" type="text" value={this.state.data.password} onChange={this.handleChange} />
-							</dd>
-							<dt>Email Address</dt>
-							<dd>
-								<input name="emailaddress" type="text" value={this.state.data.emailaddress} onChange={this.handleChange} />
-							</dd>
-							<dt>Submit</dt>
-							<dd>
-								<input type="submit" value="Submit" onClick={this.handleSave} />
-							</dd>
-						</div>
-						<div className="col-md-8">
-							<table>
-								<thead>
-									<tr>
-										<th>Firstname</th>
-										<th>Lastname</th>
-										<th>Password</th>
-										<th>Email address</th>
-									</tr>
-								</thead>
-								<tbody>
-								{_.map(this.state.users, function(user) {
-								return (
-										<tr>
-											<td>{user.firstname}</td>
-											<td>{user.lastname}</td>
-											<td>{user.password}</td>
-											<td>{user.emailaddress}</td>
-										</tr>
-										);	
-								})}
-								</tbody>
-							</table>
+						<div className="col-md-12" style={{overflowX: "hidden"}}>
+							<DataTable
+								keys="id"
+								columns={columns}
+								initialData={this.state.users}
+								initialPageLength={5}
+							/>
+							<button type="button" onClick={this.formPopup}>Add Account</button>
+							<button type="button" onClick={this.handleDelete} style={{marginLeft: 5}}>Clear Table</button>
 						</div>
 					</dl>
 				</form>
