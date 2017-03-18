@@ -89,7 +89,7 @@ var UserView = React.createClass({
 							<Column 
 								header={<Cell>First Name</Cell>}
 								cell={(_.map(rows, function(row) {
-									return <Cell>{row.firstname}</Cell>;
+									return <Cell key={row.id}>{row.firstname}</Cell>;
 								}))}		
 								width={200}
 							/>
