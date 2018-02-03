@@ -1,6 +1,4 @@
 var React = require('react');
-var DataTable = require('react-data-components').DataTable;
-var AccountForm = require('./AccountForm.jsx');
 
 var AccountView = React.createClass({
 
