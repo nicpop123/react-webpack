@@ -3,12 +3,13 @@ var DashboardView = React.createClass({
 		return (
 			<div>
 				
-				<div style={{textAlign: "center", border: "1px solid #ccc"}}>  
+				<div style={{textAlign: "center"}}>  
 					<img
 							src="https://image.freepik.com/free-vector/unicorn-background-design_1324-79.jpg"
 							width={400} 
 							height={400} 
-					 />
+					 	style={{border: "1px solid #ccc"}}
+					/>
 				</div>
 				<div style={{textAlign: "center"}}>	
 					<h1 style={{marginLeft: 15}}>unicorn</h1>
