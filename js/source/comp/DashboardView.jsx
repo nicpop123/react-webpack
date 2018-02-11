@@ -1,5 +1,11 @@
 var DashboardView = React.createClass({
 	render: function() {
+		var arr = [1, 4, 123, 422, 78];
+		var arr2 = [true, false, false, true, true];
+  console.log(arr2);
+		var bool = arr2[0];
+		console.log(bool);
+
 		return (
 			<div>
 				
