@@ -5,7 +5,11 @@ var DashboardView = React.createClass({
   console.log(arr2);
 		var bool = arr2[0];
 		console.log(bool);
-
+		var arr4 = [{}, 1, "dog"];
+		console.log(arr4[0]);
+		var blah = {blah: "elephant"};
+		console.log(blah.blah);
+		
 		return (
 			<div>
 				
