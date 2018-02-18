@@ -1,5 +1,32 @@
 var DashboardView = React.createClass({
-	render: function() {
+
+	logBooleans: function() {
+		
+	},
+
+
+/*
+
+Cut a string
+var welcome = "Hello";
+var cut = welcome.substring(0, 3);
+console.log(cut);  -> "Hell";
+
+console.log(welcome.length) -> 5
+
+*/
+
+	logLoops: function() {
+		var strBuilder = "";
+		for(var i = 1; i < 12; i++) {
+			strBuilder = strBuilder + "*";
+			console.dir(strBuilder);
+		}
+	},
+
+
+
+	logObjects: function() {
 		var arr = [1, 4, 123, 422, 78];
 		var output = _.map(arr, function(value, key) { 
 			console.log(value, key);
@@ -17,6 +44,12 @@ var DashboardView = React.createClass({
 		console.log(person.baby.gender); 
 		var animals = {pets: ["dog", "cat", "fish"], color: "orange", size: "m", amount: 13};		
 		console.log(animals.pets[1]); 	
+	},
+
+	render: function() {
+		this.logBooleans();
+		this.logObjects();
+		this.logLoops();
 		return (
 			<div>
 				
@@ -39,6 +72,22 @@ var DashboardView = React.createClass({
 			</div>
 		);
 	}
+
+	answerKey: function() {
+		var strBuilder = "";
+		for(var i = 1; i < 12; i++) {
+			strBuilder = strBuilder + "*";
+			console.dir(strBuilder);
+		}
+		var strEnding = "**********";
+		for (var i = 1; < 11; i++) {
+			strEnding = strEnding.substring(0, strEnding.length - 1);
+			console.log(strEnding);
+		}
+	},
+
+
+
 });
 
 module.exports = DashboardView;
