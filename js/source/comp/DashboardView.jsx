@@ -1,15 +1,22 @@
 var DashboardView = React.createClass({
 	render: function() {
 		var arr = [1, 4, 123, 422, 78];
+		var output = _.map(arr, function(value, key) { 
+			console.log(value, key);
+			return value;
+		});
 		var arr2 = [true, false, false, true, true];
   console.log(arr2);
 		var bool = arr2[0];
 		console.log(bool);
 		var arr4 = [{}, 1, "dog"];
 		console.log(arr4[0]);
-		var blah = {blah: "elephant"};
-		console.log(blah.blah);
-		
+		var blah = {jibber: "elephant"};
+		console.log(blah.jibber);
+		var person = {eyeColor: "green", hairColor: "brown", firstName: "Nicole", age: 150, baby: {weight: 100, gender: "m", eyeColor: "blue"}};
+		console.log(person.baby.gender); 
+		var animals = {pets: ["dog", "cat", "fish"], color: "orange", size: "m", amount: 13};		
+		console.log(animals.pets[1]); 	
 		return (
 			<div>
 				
