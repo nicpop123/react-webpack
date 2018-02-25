@@ -17,10 +17,17 @@ console.log(welcome.length) -> 5
 */
 
 	logLoops: function() {
-		var strBuilder = "";
-		for(var i = 1; i < 12; i++) {
-			strBuilder = strBuilder + "*";
-			console.dir(strBuilder);
+		for (var x = 1; x	< 6; i++)	{
+			var strBuilder = "";
+			for(var i = 1; i < 12; i++) {
+				strBuilder = strBuilder + "*";
+				console.dir(strBuilder);
+			}
+			strBuilder = "***********";
+			for (var i = 1; i < 12; i++) {
+					console.dir(strBuilder);
+					strBuilder = strBuilder.substring(0, strBuilder.length-1);
+			}
 		}
 	},
 
@@ -71,23 +78,6 @@ console.log(welcome.length) -> 5
 				</div>
 			</div>
 		);
-	}
-
-	answerKey: function() {
-		var strBuilder = "";
-		for(var i = 1; i < 12; i++) {
-			strBuilder = strBuilder + "*";
-			console.dir(strBuilder);
-		}
-		var strEnding = "**********";
-		for (var i = 1; < 11; i++) {
-			strEnding = strEnding.substring(0, strEnding.length - 1);
-			console.log(strEnding);
-		}
 	},
-
-
-
 });
-
 module.exports = DashboardView;
